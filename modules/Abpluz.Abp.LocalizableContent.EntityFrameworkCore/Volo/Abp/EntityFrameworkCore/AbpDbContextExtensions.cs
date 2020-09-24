@@ -5,13 +5,6 @@ namespace Volo.Abp.EntityFrameworkCore
 {
     public static class AbpDbContextExtensions
     {
-        public static bool ShouldFilterLocalizableContent<TDbContext, TEntity>(this AbpDbContext<TDbContext> context)
-            where TDbContext : DbContext
-            where TEntity : class
-        {
-            return typeof(IHasLocalizableContent).IsAssignableFrom(typeof(TEntity));
-        }
-
         public static void ConfigureLocalizableContentEntities(this ModelBuilder modelBuilder)
         {
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
