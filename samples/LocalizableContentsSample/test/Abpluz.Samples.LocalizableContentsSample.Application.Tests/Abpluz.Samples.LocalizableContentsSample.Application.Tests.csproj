@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Abpluz.Samples.LocalizableContentsSample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Abpluz.Samples.LocalizableContentsSample.Application\Abpluz.Samples.LocalizableContentsSample.Application.csproj" />
+    <ProjectReference Include="..\Abpluz.Samples.LocalizableContentsSample.Domain.Tests\Abpluz.Samples.LocalizableContentsSample.Domain.Tests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+  </ItemGroup>
+
+</Project>
