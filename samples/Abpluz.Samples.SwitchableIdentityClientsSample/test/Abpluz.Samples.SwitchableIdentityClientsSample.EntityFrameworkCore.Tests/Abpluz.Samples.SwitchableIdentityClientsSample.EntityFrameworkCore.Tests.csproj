@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Abpluz.Samples.SwitchableIdentityClientsSample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Abpluz.Samples.SwitchableIdentityClientsSample.EntityFrameworkCore.DbMigrations\Abpluz.Samples.SwitchableIdentityClientsSample.EntityFrameworkCore.DbMigrations.csproj" />
+    <ProjectReference Include="..\Abpluz.Samples.SwitchableIdentityClientsSample.TestBase\Abpluz.Samples.SwitchableIdentityClientsSample.TestBase.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+  </ItemGroup>
+
+</Project>
