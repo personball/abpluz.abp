@@ -165,6 +165,8 @@ namespace Pluz.Sample.Web
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Sample API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
+                    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, typeof(SampleApplicationModule).Assembly.GetName().Name + ".xml"));
+
                 }
             );
         }

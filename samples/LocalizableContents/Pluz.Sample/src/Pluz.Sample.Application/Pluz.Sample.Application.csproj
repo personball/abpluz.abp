@@ -7,6 +7,14 @@
     <RootNamespace>Pluz.Sample</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>.\Pluz.Sample.Application.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\Pluz.Sample.Application.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Pluz.Sample.Domain\Pluz.Sample.Domain.csproj" />
     <ProjectReference Include="..\Pluz.Sample.Application.Contracts\Pluz.Sample.Application.Contracts.csproj" />

@@ -10,7 +10,7 @@ namespace Pluz.Sample.EntityFrameworkCore
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddAbpDbContext<SampleMigrationsDbContext>();
+            context.Services.AddAbpDbContext<SampleMigrationsDbContext>(opt => opt.AddDefaultRepositories(true));
         }
     }
 }

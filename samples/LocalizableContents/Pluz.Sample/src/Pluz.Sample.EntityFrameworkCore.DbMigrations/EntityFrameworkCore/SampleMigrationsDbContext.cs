@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Pluz.Sample.DemoProducts;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -25,6 +26,10 @@ namespace Pluz.Sample.EntityFrameworkCore
 
         }
 
+        public virtual DbSet<DemoProduct> DemoProducts { get; set; }
+
+        public virtual DbSet<DemoProductLocalizableEntry> DemoProductLocalizableEntries { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -39,7 +44,7 @@ namespace Pluz.Sample.EntityFrameworkCore
             builder.ConfigureIdentityServer();
             builder.ConfigureFeatureManagement();
             builder.ConfigureTenantManagement();
-
+            
             /* Configure your own tables/entities inside the ConfigureSample method */
 
             builder.ConfigureSample();

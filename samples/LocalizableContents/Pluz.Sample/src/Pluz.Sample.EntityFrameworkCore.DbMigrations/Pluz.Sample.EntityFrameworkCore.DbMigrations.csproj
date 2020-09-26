@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200926090650_AddDemoProducts2.cs" />
+    <Compile Remove="Migrations\20200926090650_AddDemoProducts2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Pluz.Sample.EntityFrameworkCore\Pluz.Sample.EntityFrameworkCore.csproj" />
   </ItemGroup>
 

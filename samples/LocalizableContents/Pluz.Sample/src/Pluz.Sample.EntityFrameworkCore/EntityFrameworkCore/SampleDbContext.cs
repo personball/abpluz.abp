@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Globalization;
+using System.Linq.Expressions;
+using Abpluz.Abp.LocalizableContents;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Pluz.Sample.DemoProducts;
 using Pluz.Sample.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -21,6 +27,10 @@ namespace Pluz.Sample.EntityFrameworkCore
     public class SampleDbContext : AbpDbContext<SampleDbContext>
     {
         public DbSet<AppUser> Users { get; set; }
+        protected virtual string CurrentCultureName => CultureInfo.CurrentCulture.Name;
+
+        protected virtual bool IsCultureEntryFilterEnabled => DataFilter?.IsEnabled<IHasLocalizableContent>() ?? false;
+
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside SampleDbContextModelCreatingExtensions.ConfigureSample
@@ -31,6 +41,9 @@ namespace Pluz.Sample.EntityFrameworkCore
         {
 
         }
+        public virtual DbSet<DemoProduct> DemoProducts { get; set; }
+
+        public virtual DbSet<DemoProductLocalizableEntry> DemoProductLocalizableEntries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -41,7 +54,7 @@ namespace Pluz.Sample.EntityFrameworkCore
             builder.Entity<AppUser>(b =>
             {
                 b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); //Sharing the same table "AbpUsers" with the IdentityUser
-                
+
                 b.ConfigureByConvention();
                 b.ConfigureAbpUser();
 
@@ -53,6 +66,30 @@ namespace Pluz.Sample.EntityFrameworkCore
             /* Configure your own tables/entities inside the ConfigureSample method */
 
             builder.ConfigureSample();
+        }
+
+        protected override bool ShouldFilterEntity<TEntity>(IMutableEntityType entityType)
+        {
+            if (typeof(IHasLocalizableContent).IsAssignableFrom(typeof(TEntity)))
+            {
+                return true;
+            }
+
+            return base.ShouldFilterEntity<TEntity>(entityType);
+        }
+
+        protected override Expression<Func<TEntity, bool>> CreateFilterExpression<TEntity>()
+        {
+            var expression= base.CreateFilterExpression<TEntity>();
+
+            if (typeof(IHasLocalizableContent).IsAssignableFrom(typeof(TEntity)))
+            {
+                // HACK IHasCultureEntry 自动根据当前CultureInfo添加过滤器
+                Expression<Func<TEntity, bool>> cultureFilter = e => !IsCultureEntryFilterEnabled || EF.Property<string>(e, nameof(IHasLocalizableContent.CultureName)) == CurrentCultureName; // 当心变量捕获
+                expression = expression == null ? cultureFilter : CombineExpressions(expression, cultureFilter);
+            }
+
+            return expression;
         }
     }
 }

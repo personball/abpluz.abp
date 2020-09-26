@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pluz.Sample.Application</name>
+    </assembly>
+    <members>
+        <member name="M:Pluz.Sample.DemoProducts.DemoProductAppService.CreateAsync(Pluz.Sample.DemoProducts.Dto.ProductDto)">
+            <summary>
+            (数据库内容本地化demo)增加本地化语言副本entry 不算create，走update
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluz.Sample.DemoProducts.DemoProductAppService.DeleteAsync(System.Guid)">
+            <summary>
+            (数据库内容本地化demo) TODO 级联删除？
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluz.Sample.DemoProducts.DemoProductAppService.GetAsync(System.Guid)">
+            <summary>
+            (数据库内容本地化demo) 根据cookie\querystring\header获取指定语言版本 单个对象
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluz.Sample.DemoProducts.DemoProductAppService.GetListWithAllEntriesAsync">
+            <summary>
+            (数据库内容本地化demo) 获取所有语言副本
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pluz.Sample.DemoProducts.DemoProductAppService.GetListAsync">
+            <summary>
+            (数据库内容本地化demo) 根据cookie\querystring\header获取指定语言版本 查询列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pluz.Sample.DemoProducts.DemoProductAppService.UpdateAsync(System.Guid,Pluz.Sample.DemoProducts.Dto.ProductDto)">
+            <summary>
+            (数据库内容本地化demo) 更新指定语言版本
+            </summary>
+            <param name="id"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

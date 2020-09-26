@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Pluz.Sample.DemoProducts;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore;
 
 namespace Pluz.Sample.EntityFrameworkCore
 {
@@ -17,6 +19,17 @@ namespace Pluz.Sample.EntityFrameworkCore
             //    b.ConfigureByConvention(); //auto configure for the base class props
             //    //...
             //});
+
+            builder.Entity<DemoProduct>(opt =>
+            {
+                opt.HasMany(b => b.Entries).WithOne().HasForeignKey(e => e.Id);
+            });
+            builder.Entity<DemoProductLocalizableEntry>(opt =>
+            {
+                opt.HasKey(b => new { b.Id, b.CultureName });
+            });
+            
+            builder.ConfigureLocalizableContentEntities();
         }
     }
 }
