@@ -67,7 +67,7 @@ appsettings.json
   "RemoteServices": {
     "Default": {
       "BaseUrl": "https://localhost:44376",
-      "IdentityClientName": "Default"
+      "IdentityClient": "Default"
     }
   },
   "IdentityClients": {
