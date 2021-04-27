@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abpluz.Abp.LocalizableConte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abpluz.Abp.Caching.StackExchageRedis", "modules\Abpluz.Abp.Caching.StackExchageRedis\Abpluz.Abp.Caching.StackExchageRedis.csproj", "{EB359291-B483-45AF-B5D9-0ADF34BE559E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C9CE6675-9FAE-4DE6-9AE3-6209EDFDC880}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abpluz.Abp", "src\Abpluz.Abp\Abpluz.Abp.csproj", "{4DC63BBF-4A61-43E3-BB7C-6BF4E9C43987}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,10 @@ Global
 		{EB359291-B483-45AF-B5D9-0ADF34BE559E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB359291-B483-45AF-B5D9-0ADF34BE559E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB359291-B483-45AF-B5D9-0ADF34BE559E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DC63BBF-4A61-43E3-BB7C-6BF4E9C43987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC63BBF-4A61-43E3-BB7C-6BF4E9C43987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC63BBF-4A61-43E3-BB7C-6BF4E9C43987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC63BBF-4A61-43E3-BB7C-6BF4E9C43987}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +52,7 @@ Global
 		{FEA3751A-9763-45D0-8868-F14E3E40B14B} = {C31814E6-1216-4D94-9154-E5EF1AF86253}
 		{3844FCDC-299E-483A-8B8D-B3994BA9C330} = {C31814E6-1216-4D94-9154-E5EF1AF86253}
 		{EB359291-B483-45AF-B5D9-0ADF34BE559E} = {C31814E6-1216-4D94-9154-E5EF1AF86253}
+		{4DC63BBF-4A61-43E3-BB7C-6BF4E9C43987} = {C9CE6675-9FAE-4DE6-9AE3-6209EDFDC880}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B38345BC-31B5-42A2-80E0-35F9CAC51D8F}
