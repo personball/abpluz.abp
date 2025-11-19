@@ -10,5 +10,7 @@ public interface IFunctionCallExecutor
     /// <param name="functionName"></param>
     /// <param name="functionArguments"></param>
     /// <returns></returns>
-    Task<ChatMessage> HandleAsync(string functionName, BinaryData functionArguments);
+    Task<ToolChatMessage> ExecuteAsync(string functionName, BinaryData functionArguments);
+
+    List<ChatTool> Tools { get; }
 }

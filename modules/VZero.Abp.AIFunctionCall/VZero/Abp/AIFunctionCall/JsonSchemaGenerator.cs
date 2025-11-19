@@ -5,9 +5,9 @@ using Json.Schema.Generation;
 
 namespace VZero.Abp.AIFunctionCall;
 
-public static class JsonSchemaGenerator
+internal static class JsonSchemaGenerator
 {
-    public static JsonSchema GenerateSchema(this MethodInfo method)
+    internal static JsonSchema GenerateSchema(this MethodInfo method)
     {
         var parameters = method.GetParameters();
 

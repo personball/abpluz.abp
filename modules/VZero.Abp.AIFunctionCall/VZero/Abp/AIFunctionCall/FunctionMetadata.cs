@@ -21,7 +21,7 @@ public class FunctionMetadata
     public JsonSchema ParametersSchema { get; set; } = null!;
 
     // 结果转换逻辑所在的类型，如果为空，默认转换方法在 ServiceType 上 
-    // 必须用 AIFunctionCallResultConvertAttribute 标注
+    // 如果不为空，肯定来自 AIFunctionCallResultConvertAttribute 标注
     public Type? ResultConvertServiceType { get; set; }
 
     // 结果转换方法
