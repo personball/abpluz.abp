@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Pluz.Sample.Domain\Pluz.Sample.Domain.csproj" />
     <ProjectReference Include="..\Pluz.Sample.Application.Contracts\Pluz.Sample.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\..\modules\VZero.Abp.AIFunctionCall\VZero.Abp.AIFunctionCall.csproj" />
   </ItemGroup>
 
   <ItemGroup>
