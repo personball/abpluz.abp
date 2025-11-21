@@ -13,4 +13,6 @@ public interface IDemoAppService : IApplicationService
     Task<string> GetStringAsync(string a, int times);
 
     Task<DemoDto> GetDemoDtoAsync(string name, int value);
+
+    Task WithMoreComplexInputType(ComplexInputDto input);
 }

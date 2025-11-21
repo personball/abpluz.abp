@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
 using Microsoft.Extensions.Logging;
 using OpenAI.Chat;
 using VZero.Abp.AIFunctionCall;

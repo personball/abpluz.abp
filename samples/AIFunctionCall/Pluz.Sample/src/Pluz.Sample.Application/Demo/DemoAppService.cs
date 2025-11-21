@@ -39,4 +39,11 @@ public class DemoAppService : SampleAppService, IDemoAppService
     {
         return ChatMessage.CreateToolMessage(functionName, $"get a name:{input.Name} and value:{input.Value}");
     }
+
+    [AIFunctionCall(nameof(WithMoreComplexInputType), " just a test for complex input")]
+    public async Task WithMoreComplexInputType(ComplexInputDto input)
+    {
+
+        Console.WriteLine($"[{nameof(WithMoreComplexInputType)}] Called");
+    }
 }

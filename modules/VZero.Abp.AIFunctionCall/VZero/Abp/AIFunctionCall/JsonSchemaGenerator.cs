@@ -16,6 +16,7 @@ internal static class JsonSchemaGenerator
 
         var properties = new Dictionary<string, JsonSchema>();
         var required = new List<string>();
+        var allDefs = new Dictionary<string, JsonSchema>();
 
         foreach (var param in parameters)
         {
@@ -27,6 +28,20 @@ internal static class JsonSchemaGenerator
             {
                 required.Add(param.Name!);
             }
+
+            // inner defs to root
+            // 手动收集每个参数schema中的definitions
+            var defs = paramSchema.GetDefs();
+            if (defs != null)
+            {
+                foreach (var def in defs)
+                {
+                    if (!allDefs.ContainsKey(def.Key))
+                    {
+                        allDefs.Add(def.Key, def.Value);
+                    }
+                }
+            }
         }
 
         schemaBuilder = schemaBuilder.Properties(properties);
@@ -34,6 +49,11 @@ internal static class JsonSchemaGenerator
         if (required.Count > 0)
         {
             schemaBuilder = schemaBuilder.Required(required);
+        }
+
+        if (allDefs.Count > 0)
+        {
+            schemaBuilder = schemaBuilder.Defs(allDefs);
         }
 
         return schemaBuilder.Build();
