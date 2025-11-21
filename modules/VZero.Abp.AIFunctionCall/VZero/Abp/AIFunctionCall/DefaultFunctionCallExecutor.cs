@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using Json.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenAI.Chat;
@@ -84,12 +85,22 @@ public class DefaultFunctionCallExecutor : IFunctionCallExecutor
             }
 
             // 整体校验
-            var validationResults = metadata.ParametersSchema.Evaluate(paramsJsonNode);
+            var validationResults = metadata.ParametersSchema.Evaluate(paramsJsonNode,
+                new Json.Schema.EvaluationOptions
+                {
+                    OutputFormat = Json.Schema.OutputFormat.Hierarchical
+                });
+
             if (!validationResults.IsValid)
             {
-                if (validationResults.HasErrors)
-                    return Warn("Function Arguments Not Valid: " + string.Join(",", validationResults.Errors!.Select(e => $" the {e.Key} {e.Value}")));
-                return Warn("Function Arguments Not Valid!");
+                var firstErr = FindFirstErrRecursive(validationResults);
+                if (firstErr == null)
+                {
+                    return Warn("Function Arguments Not Valid!");
+                }
+
+                if (firstErr.HasErrors)
+                    return Warn($"Function Arguments Not Valid: for {firstErr.EvaluationPath} " + string.Join(",", firstErr.Errors!.Select(e => $"[{e.Key}] {e.Value}")));
             }
 
             // 第一层是封包的object，需要拆开
@@ -233,6 +244,33 @@ public class DefaultFunctionCallExecutor : IFunctionCallExecutor
             _logger.LogError(ex, ex.Message);
             return ChatMessage.CreateToolMessage(functionName, $"Something wrong:{ex.Message}");
         }
+    }
+
+    private EvaluationResults? FindFirstErrRecursive(EvaluationResults validationResults)
+    {
+        if (!validationResults.IsValid)
+        {
+            if (validationResults.HasErrors)
+                return validationResults;
+
+            if (validationResults.HasDetails)
+            {
+                foreach (var detail in validationResults.Details)
+                {
+                    var target = FindFirstErrRecursive(detail);
+                    if (target != null)
+                    {
+                        return target;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     private void BuildChatTools([NotNull] List<ChatTool> tools)
