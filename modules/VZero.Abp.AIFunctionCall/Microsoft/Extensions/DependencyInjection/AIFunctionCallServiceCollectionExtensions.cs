@@ -1,11 +1,14 @@
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
+using Microsoft.Extensions.Logging;
+using OpenAI.Chat;
 using VZero.Abp.AIFunctionCall;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
 public static class AIFunctionCallServiceCollectionExtensions
 {
-    public static ServiceCollection AddAIFunctionCalls(this ServiceCollection services, params Assembly[] assemblies)
+    public static IServiceCollection AddAIFunctionCalls(this IServiceCollection services, params Assembly[] assemblies)
     {
         foreach (var assembly in assemblies)
         {
@@ -16,8 +19,17 @@ public static class AIFunctionCallServiceCollectionExtensions
 
         return services;
     }
+    internal static bool IsTaskOrTaskValueToolChatMessage(this Type type)
+    {
+        var isGenericType = type.IsGenericType;
+        var isGenericTask = type.GetGenericTypeDefinition() == typeof(Task<>);
+        var isGenericValueTask = type.GetGenericTypeDefinition() == typeof(ValueTask<>);
+        var isToolChatMessage = type.GetGenericArguments().Contains(typeof(ToolChatMessage));
+        return isGenericType && isToolChatMessage && (isGenericTask || isGenericValueTask);
+    }
 
-    internal static void AddAIFunctionCall(this ServiceCollection services, Assembly assembly)
+
+    internal static void AddAIFunctionCall(this IServiceCollection services, Assembly assembly)
     {
         // collect FunctionMetadata from assemblies
         var types = assembly.GetTypes()
@@ -65,7 +77,15 @@ public static class AIFunctionCallServiceCollectionExtensions
                             var rcmi = type.GetMethod(attribute.ResultConverterMethodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
                             if (rcmi != null)
                             {
-                                metadata.ResultConvertMethodInfo = rcmi;
+                                if (rcmi.ReturnType == typeof(ToolChatMessage) || type.IsTaskOrTaskValueToolChatMessage())
+                                {
+                                    metadata.ResultConvertMethodInfo = rcmi;
+                                }
+                                else
+                                {
+                                    var logger = services.BuildServiceProvider().GetRequiredService<ILogger<AIFunctionCallModule>>();
+                                    logger.LogWarning($"The method '{attribute.ResultConverterMethodName}' in type '{type.FullName}' does not return ToolChatMessage or Task/ValueTask of ToolChatMessage.");
+                                }
                             }
                         }
 

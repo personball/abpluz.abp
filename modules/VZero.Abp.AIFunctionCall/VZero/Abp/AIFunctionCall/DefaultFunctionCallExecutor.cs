@@ -178,7 +178,7 @@ public class DefaultFunctionCallExecutor : IFunctionCallExecutor
             // 结果转换
             if (metadata.ResultConvertServiceType == null)
             {
-                var message = metadata.ResultConvertMethodInfo.Invoke(service, [result]);
+                var message = metadata.ResultConvertMethodInfo.Invoke(service, [result, metadata.Name]);
                 if (message == null)
                 {
                     return Error(
@@ -202,7 +202,7 @@ public class DefaultFunctionCallExecutor : IFunctionCallExecutor
             var converterService = _serviceProvider.GetRequiredService(metadata.ResultConvertServiceType!);
             if (converterService != null)
             {
-                var message = metadata.ResultConvertMethodInfo.Invoke(converterService, [result]);
+                var message = metadata.ResultConvertMethodInfo.Invoke(converterService, [result, metadata.Name]);
                 if (message == null)
                 {
                     return Error(
