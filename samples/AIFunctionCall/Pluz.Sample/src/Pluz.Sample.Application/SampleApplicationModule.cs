@@ -6,6 +6,9 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using VZero.Abp.AIFunctionCall;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Pluz.Sample;
 
@@ -17,7 +20,8 @@ namespace Pluz.Sample;
     typeof(AbpPermissionManagementApplicationModule),
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
-    typeof(AbpSettingManagementApplicationModule)
+    typeof(AbpSettingManagementApplicationModule),
+    typeof(AIFunctionCallModule)
     )]
 public class SampleApplicationModule : AbpModule
 {
@@ -27,5 +31,8 @@ public class SampleApplicationModule : AbpModule
         {
             options.AddMaps<SampleApplicationModule>();
         });
+
+        context.Services.AddAIFunctionCalls(Assembly.GetExecutingAssembly());
+
     }
 }
