@@ -183,6 +183,11 @@ public class DefaultFunctionCallExecutor : IFunctionCallExecutor
                     return toolChatMessage;
                 }
 
+                if (result is string res_str)
+                {
+                    return Ok(res_str);
+                }
+
                 return Ok(JsonSerializer.Serialize(result));
             }
 
