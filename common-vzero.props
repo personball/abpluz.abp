@@ -8,5 +8,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/personball/abpluz.abp/</RepositoryUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageOutputPath>../../nupkg</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 </Project>
