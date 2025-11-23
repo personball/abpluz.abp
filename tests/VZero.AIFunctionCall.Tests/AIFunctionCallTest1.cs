@@ -5,11 +5,11 @@ using Shouldly;
 
 namespace VZero.AIFunctionCall.Tests;
 
-public class UnitTest1
+public class AIFunctionCallTest1
 {
     private readonly SampleAppService _sampleAppService;
     private readonly IFunctionCallExecutor _functionCallExecutor;
-    public UnitTest1(
+    public AIFunctionCallTest1(
         SampleAppService sampleAppService,
         IFunctionCallExecutor functionCallExecutor)
     {
@@ -30,5 +30,12 @@ public class UnitTest1
         var message = await _functionCallExecutor.ExecuteAsync(nameof(_sampleAppService.GetStringAsync), BinaryData.FromString("{}"));
 
         message.ToJsonString().ShouldBe(ChatMessage.CreateToolMessage(nameof(_sampleAppService.GetStringAsync), "123").ToJsonString());
+    }
+
+    [Fact]
+    public async Task Tools_Count()
+    {
+        var tools = _functionCallExecutor.Tools;
+        tools.Count.ShouldBe(1);
     }
 }

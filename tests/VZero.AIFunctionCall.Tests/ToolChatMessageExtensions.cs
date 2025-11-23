@@ -3,7 +3,7 @@ using OpenAI.Chat;
 
 namespace VZero.AIFunctionCall.Tests;
 
-public static class ChatMessageBase
+public static class ToolChatMessageExtensions
 {
     public static string ToJsonString(this ToolChatMessage toolChatMessage)
     {
