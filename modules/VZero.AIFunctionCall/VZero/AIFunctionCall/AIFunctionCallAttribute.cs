@@ -1,4 +1,4 @@
-namespace VZero.Abp.AIFunctionCall;
+namespace VZero.AIFunctionCall;
 
 [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)] // 多个 Function 实际上是同一个方法好像也没关系
 public class AIFunctionCallAttribute : Attribute

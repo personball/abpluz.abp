@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using OpenAI.Chat;
-using VZero.Abp.AIFunctionCall;
+using VZero.AIFunctionCall;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -71,7 +71,7 @@ public static class AIFunctionCallServiceCollectionExtensions
                         };
 
                         // ResultConverterMethod
-                        if (!attribute.ResultConverterMethodName.IsNullOrWhiteSpace())
+                        if (!string.IsNullOrWhiteSpace(attribute.ResultConverterMethodName))
                         {
                             var rcmi = type.GetMethod(attribute.ResultConverterMethodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
                             if (rcmi != null)
@@ -82,7 +82,7 @@ public static class AIFunctionCallServiceCollectionExtensions
                                 }
                                 else
                                 {
-                                    var logger = services.BuildServiceProvider().GetRequiredService<ILogger<AIFunctionCallModule>>();
+                                    var logger = services.BuildServiceProvider().GetRequiredService<ILogger<AIFunctionCallAttribute>>();
                                     logger.LogWarning($"The method '{attribute.ResultConverterMethodName}' in type '{type.FullName}' does not return ToolChatMessage or Task/ValueTask of ToolChatMessage.");
                                 }
                             }

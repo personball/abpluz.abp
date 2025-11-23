@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
-using VZero.Abp.AIFunctionCall;
+using VZero.AIFunctionCall;
 
 namespace Pluz.Sample.Controllers;
 

@@ -1,7 +1,7 @@
 using System.Reflection;
 using Json.Schema;
 
-namespace VZero.Abp.AIFunctionCall;
+namespace VZero.AIFunctionCall;
 
 public class FunctionMetadata
 {

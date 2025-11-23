@@ -1,6 +1,6 @@
 using OpenAI.Chat;
 
-namespace VZero.Abp.AIFunctionCall;
+namespace VZero.AIFunctionCall;
 
 public interface IFunctionCallExecutor
 {

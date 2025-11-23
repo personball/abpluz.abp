@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OpenAI.Chat;
 using Pluz.Sample.Demo.Dto;
-using VZero.Abp.AIFunctionCall;
+using VZero.AIFunctionCall;
 
 namespace Pluz.Sample.Demo;
 
@@ -34,7 +34,6 @@ public class DemoAppService : SampleAppService, IDemoAppService
         return string.Concat(Enumerable.Repeat(a, times));
     }
 
-    // TODO: Convert Method 的签名验证规则
     public ToolChatMessage ConvertDemoDtoToToolChatMessage(DemoDto input, string functionName) // functionName 会自动赋值
     {
         return ChatMessage.CreateToolMessage(functionName, $"get a name:{input.Name} and value:{input.Value}");

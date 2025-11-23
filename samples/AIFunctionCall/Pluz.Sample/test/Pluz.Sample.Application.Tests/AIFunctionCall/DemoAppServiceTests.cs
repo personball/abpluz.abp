@@ -10,7 +10,7 @@ using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
-using VZero.Abp.AIFunctionCall;
+using VZero.AIFunctionCall;
 using Xunit;
 
 namespace Pluz.Sample.Demo;

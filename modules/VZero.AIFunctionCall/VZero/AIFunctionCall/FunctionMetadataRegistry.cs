@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace VZero.Abp.AIFunctionCall;
+namespace VZero.AIFunctionCall;
 
 internal static class FunctionMetadataRegistry
 {

@@ -3,7 +3,7 @@ using System.Text.Json;
 using Json.Schema;
 using Json.Schema.Generation;
 
-namespace VZero.Abp.AIFunctionCall;
+namespace VZero.AIFunctionCall;
 
 internal static class JsonSchemaGenerator
 {
